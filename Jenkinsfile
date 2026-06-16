@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/aadityafour7/java-demo.git'
-            }
-        }
-
         stage('Build') {
             steps {
                 bat 'mvn clean compile'
@@ -25,6 +19,16 @@ pipeline {
             steps {
                 bat 'mvn package'
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build Successful'
+        }
+
+        failure {
+            echo 'Build Failed'
         }
     }
 }
